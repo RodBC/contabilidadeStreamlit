@@ -1,7 +1,7 @@
 import pandas as pd
 import streamlit as st
 from despesas import get_despesas, mostrar_despesas
-
+from graficos import criar_grafico_barras
 
 #PRIMEIRO FAÇA O UPLOAD DA PLANILHA https://docs.google.com/spreadsheets/d/1xw8bydqh0v4zlsuchqzB3JiSNMt1sYQjIHhN-3pbLNA/edit?usp=sharing
 # EM FORMATO CSV
@@ -42,17 +42,13 @@ def main():
         data_visualization = data.copy()
 
         if selected_uf != "Todas as UF":
-            # # # filtered_data = filtered_data[(filtered_data['UF'] == selected_uf)]
             data_visualization = data_visualization[(data_visualization['UF'] == selected_uf)]
         if selected_ano != "Todos os anos":
-            # # # filtered_data = filtered_data[(filtered_data['Ano'] == selected_ano)]
             data_visualization = data_visualization[(data_visualization['Ano'] == selected_ano)]
 
         if selected_regiao != 'Todas as Regiões':
-            # # # filtered_data = filtered_data[(filtered_data['Região'] == selected_regiao)]
             data_visualization = data_visualization[(data_visualization['Região'] == selected_regiao)]
         if selected_subfunco != 'Todas as Subfuncoes':
-            # # # filtered_data = filtered_data[(filtered_data['Subfunção'] == selected_subfunco)]
             data_visualization = data_visualization[(data_visualization['Subfunção'] == selected_subfunco)]
 
         st.subheader('Dados Filtrados')
@@ -65,5 +61,10 @@ def main():
         Empenhado, Liquidado, Pago, RP_Pago, Despesa_Executada = get_despesas(data_visualization)
         mostrar_despesas(Empenhado, Liquidado, Pago, RP_Pago, Despesa_Executada)
 
+        total_by_coluna = [Empenhado, Liquidado, Pago, RP_Pago, Despesa_Executada]
+        #Gráfico Despesa
+        with st.expander("Visualizar gráfico de despesa"):
+            criar_grafico_barras(total_by_coluna)
+      
 if __name__ == '__main__':
     main()
