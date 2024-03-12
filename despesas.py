@@ -49,7 +49,7 @@ def get_despesas(data):
 
     Empenhado, Liquidado, Pago, RP_Pago, Despesa_Executada = data.loc[:, columns].sum()
     
-    return Empenhado, Liquidado, Pago, RP_Pago*1000, Despesa_Executada
+    return Empenhado, Liquidado, Pago, RP_Pago, Despesa_Executada
 
 
 def mostrar_despesas(Empenhado, Liquidado, Pago, RP_Pago, Despesa_Executada):

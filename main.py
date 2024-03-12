@@ -19,13 +19,16 @@ def main():
 
     st.set_page_config(layout="wide", page_title="Análise custos em Saúde")
     st.sidebar.image('./image.png')
-    uploaded_file = st.file_uploader("Insira o arquivo que deseja ler em CSV")
+        
+    uploaded_file = st.file_uploader("Choose a file")
+
     st.text('download https://docs.google.com/spreadsheets/d/1xw8bydqh0v4zlsuchqzB3JiSNMt1sYQjIHhN-3pbLNA/edit?usp=sharing')
 
     st.title("Análise custos em Saúde")
     
     
     if uploaded_file is not None:
+        
         data = load_data(uploaded_file)
     
         with st.sidebar:
@@ -59,8 +62,8 @@ def main():
         st.subheader(f'Valor Total por Estágio de Despesa')
         st.text(f"UF: {selected_uf} / Ano: {selected_ano} / Subfunção: {selected_subfunco} / Região: {selected_regiao}")
         
-    Empenhado, Liquidado, Pago, RP_Pago, Despesa_Executada = get_despesas(data_visualization)
-    mostrar_despesas(Empenhado, Liquidado, Pago, RP_Pago, Despesa_Executada)
+        Empenhado, Liquidado, Pago, RP_Pago, Despesa_Executada = get_despesas(data_visualization)
+        mostrar_despesas(Empenhado, Liquidado, Pago, RP_Pago, Despesa_Executada)
 
 if __name__ == '__main__':
     main()
