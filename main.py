@@ -18,16 +18,15 @@ def main():
 
 
     st.set_page_config(layout="wide", page_title="Análise custos em Saúde")
-    st.sidebar.image('./image.png', use_column_width=True)
+    st.sidebar.image('./image.png')
+    uploaded_file = st.file_uploader("Insira o arquivo que deseja ler em CSV")
+    st.text('download https://docs.google.com/spreadsheets/d/1xw8bydqh0v4zlsuchqzB3JiSNMt1sYQjIHhN-3pbLNA/edit?usp=sharing')
+
     st.title("Análise custos em Saúde")
     
-    file_path = "dados.csv"
     
-
-    uploaded_file = st.file_uploader("insira o arquivo que deseja ler")
-
     if uploaded_file is not None:
-        data = load_data(file_path)
+        data = load_data(uploaded_file)
     
         with st.sidebar:
             st.title("Filtros")
